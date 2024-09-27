@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import '../MOdels/productmodel.dart';
+import '../models/productmodel.dart';
 
 class ProductService {
   final Dio dio;
@@ -8,17 +8,17 @@ class ProductService {
 
   Future<List<ProductModel>> getProducts() async {
     try {
-      Response response = await dio.get('https://student.valuxapps.com/api/products');
-      List<dynamic> products = response.data;
+      Response response =
+          await dio.get('https://student.valuxapps.com/api/products');
 
-      List<ProductModel> productList = [];
-      for (var product in products) {
-        ProductModel productModel = ProductModel.fromJson(product);
-        productList.add(productModel);
-      }
-      return productList;
+      final List<dynamic> products = response.data['data']['data'];
+
+      return products
+          .map((product) => ProductModel.fromJson(product))
+          .toList()
+          .cast<ProductModel>();
     } catch (e) {
-      print('Error in fetchProducts: $e');
+      print('Error fetching products: $e');
       return [];
     }
   }

@@ -1,5 +1,5 @@
-import 'package:electronics_app/MOdels/productmodel.dart';
 import 'package:flutter/material.dart';
+import '../models/productmodel.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({super.key, required this.productModel});
@@ -16,14 +16,14 @@ class ProductCard extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: SizedBox(
-              height: 150,
+              height: 380,
               width: double.infinity,
               child: Image.network(
                 productModel.image.isNotEmpty ? productModel.image : '',
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
                   return Container(
-                    height: 80,
+                    height: 180,
                     alignment: Alignment.center,
                     child: const Text('Image not available'),
                   );

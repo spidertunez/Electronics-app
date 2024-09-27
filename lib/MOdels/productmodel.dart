@@ -1,23 +1,22 @@
 class ProductModel {
-  int id;
-  int price;
-  String description;
-  String image;
+  final double? id;
+  final double? price;
+  final String description;
+  final String image;
 
-  ProductModel(
-      {required this.id,
-      required this.price,
-      required this.description,
-      required this.image});
+  ProductModel({
+    required this.id,
+    required this.price,
+    required this.description,
+    required this.image,
+  });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
-      id: int.parse(json["id"]),
-      price: int.parse(json["price"]),
-      description: json["description"],
-      image: json["image"],
+      id: (json["id"] as num?)?.toDouble(),
+      price: (json["price"] as num?)?.toDouble(),
+      description: json["description"] ?? '',
+      image: json["image"] ?? '',
     );
   }
-//
 }
-
